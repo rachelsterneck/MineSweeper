@@ -1,4 +1,5 @@
 from random import randint
+from flask import jsonify
 import itertools
 import copy
 
@@ -43,7 +44,7 @@ class Mine:
                             count+=1
                     board_copy[i][j].value = count
 
-        return board_copy
+        return board_copy, mines_set
         
     def print_board(self):
         r = "  " + ' '.join(str(x) for x in range(self.size))
@@ -79,10 +80,7 @@ class Mine:
         print("--------------------\n")
           
     def has_lost(self):
-        if self.board[self.x_guess][self.y_guess].value == -1:
-            print("you lose!")
-            return False
-        else: return True
+        return self.board[self.x_guess][self.y_guess].value == -1
 
     def has_won(self):
         for i in range(self.size):
@@ -92,7 +90,7 @@ class Mine:
         return True
             
     # click square
-    def update(self, x, y):   
+    def update(self, x, y):  
         if self.board[x][y].value == 0 and not self.board[x][y].is_clicked: 
             self.board[x][y].is_clicked = True
 
@@ -110,7 +108,7 @@ class Mine:
         while 1==1:
             xy = input('Enter the coordinates of your choice "x,y"\n')
             if self.x_guess is None and self.y_guess is None:
-                self.board = self.create_mines(xy[0], xy[2])
+                self.board, _ = self.create_mines(xy[0], xy[2])
                 self.print_solution()
             self.x_guess = int(xy[0])
             self.y_guess = int(xy[2])
@@ -123,6 +121,14 @@ class Mine:
             if self.has_won():
                 print("congrats, you win!")
                 break
+        
+    def to_json(self):
+        json_board  = [[None for i in range(self.size)] for j in range(self.size)]
+        for i in range(self.size):
+            for j in range(self.size):
+                json_board[i][j] = {"is_clicked":self.board[i][j].is_clicked, "value":self.board[i][j].value}
+        return {'size':self.size, 'num_mines':self.num_mines, 'board':json_board, 'x_guess':self.x_guess, 'y_guess':self.y_guess, "message":""}
+
 
 if __name__=="__main__":
     print('\nWelcome to Minesweeper!\n')
