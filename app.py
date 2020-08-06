@@ -15,7 +15,6 @@ def new_game():
     global mine
     mine = Mine(size=9, num_mines=10)
     json_mine = mine.to_json()
-    print(json_mine)
     return json_mine
 
 @app.route('/update_game', methods=['POST'])
@@ -39,3 +38,7 @@ def update_game():
     if mine.has_lost():
         json_mine["message"] = "lost"
     return json_mine
+
+if __name__ == '__main__':
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
