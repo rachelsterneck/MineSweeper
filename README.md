@@ -6,7 +6,7 @@
     * clone this repo and install requirements ``pip3 install -r requirements.txt``
     * run ``python3 game.py``
     * follow instructions (enter coordinates to play)
-    * Note: currently, the game shows the board solution in the beginning. Comment out line 112 in ``play()`` function of game.py to remove solution
+    * Note: currently, the game shows the board solution in the beginning to help you test out winning or losing scenarios. Comment out line 112 in ``play()`` function of game.py to remove solution
 
 * Option 2: Play the game in localhost
     * clone the repo and install requirements ``pip3 install -r requirements.txt``
