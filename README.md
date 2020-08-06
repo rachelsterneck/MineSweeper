@@ -44,8 +44,8 @@
 * The logic for the terminal game and web app are quite similar. The main differences are that the Flask app methods in app.py handle the input/update logic for the web app, whereas the ``play()`` function in game.py handles this logic for the terminal game.
 
 ## Game Twist
-* I enjoy games that are involve strategy and luck. I would propose adding an tile type, a "superwin" piece to the game that automatically causes the user to win upon clicking it. 
-* The twist is that there's no way to differentiate this "superwin" piece from the mines. The tiles surrounding it would show the number of adjacent mines AND winning pieces that are adjecent to those pieces. 
+* I enjoy games that are involve strategy and luck. I would propose adding another tile type, a "superwin" piece to the game that automatically causes the user to win upon clicking it. 
+* The twist is that there's no way to differentiate this "superwin" piece from the mines. The tiles surrounding the "superwin" piece would show the number of adjacent mines AND winning pieces that are adjecent to those pieces. 
 * This twist adds some risk and reward: a user might be avoiding a piece that is actually the "superwin" tile, or they might accidentally click the "superwin" tile! 
 
 
