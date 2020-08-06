@@ -13,7 +13,7 @@
     * run ``export FLASK_APP=app.py`` followed by ``flask run`` to run the app locally
 
 * Option 3: Play the app live
-    * Note: the game doesn't function properly on the Heroku app, this is likely do to an issue with serving static files. I included the app to show that it's "running" live, however it's currently incomplete due to this static images issue. The Heroku app is running the code found in this repo, however it doesn't function the same way the localhost and terminal versions do.
+    * Note: the game doesn't function properly on the Heroku app, this likely is caused by an issue with serving static files. I included the app to show that it's "running" live, however it's currently incomplete due to this static images issue. The Heroku app is running the code found in this repo, however it doesn't function the same way the localhost and terminal versions do.
     * https://minesweeper-rachel-quiz.herokuapp.com/
 
 ## Testing the app
