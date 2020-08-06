@@ -2,6 +2,9 @@ from game import Mine
 import random
 from random import randint
 
+# update adjacent pieces to be clicked in test_win 
+# to avoid clicking tiles that have already been revealed
+# by clicked neighbors that have 0 adjacent mines
 def update_clicked(board, clicked_set):
     for i in range(len(board)):
         for j in range(len(board[0])):
@@ -14,12 +17,14 @@ def test_win():
     has_won, x, y = None, None, None
     mines_set = set()
     clicked_set = set()
+    # get random initial coordinates
     x_init, y_init = randint(0, mine.size - 1), randint(0, mine.size - 1)
     while 1==1:
         if mine.x_guess is None and mine.y_guess is None:
             mine.board, mines_set = mine.create_mines(x_init, y_init)
             mine.print_solution()
         
+        # get random coordinates of tile that aren't a mine and haven't been clicked
         while 1==1:
             x, y = randint(0, mine.size - 1), randint(0, mine.size - 1)
             if (x, y) not in mines_set and (x, y) not in clicked_set:
@@ -52,6 +57,7 @@ def test_lose():
     has_won, x, y = None, None, None
     mines_set = set()
     clicked_set = set()
+    # get random initial coordinates
     x_init, y_init = randint(0, mine.size - 1), randint(0, mine.size - 1)
     max_turns = randint(2, mine.size*mine.size - mine.num_mines - 1)
     print("Max Turns: {}".format(max_turns))
@@ -60,6 +66,7 @@ def test_lose():
             mine.board, mines_set = mine.create_mines(x_init, y_init)
             mine.print_solution()
         
+        # get random coordinates of tile that aren't a mine and haven't been clicked
         while 1==1:
             x, y = randint(0, mine.size - 1), randint(0, mine.size - 1)
             if (x, y) not in mines_set and (x, y) not in clicked_set:
@@ -77,7 +84,8 @@ def test_lose():
         if mine.board[mine.x_guess][mine.y_guess].value == -1:
             assert(False)
         if mine.has_won():
-            print("congrats, you win!") ## if num turns is high, you might win
+            # if max_turns is high, user might win
+            print("congrats, you win!") 
             assert(True)
     
     mine_xy = random.sample(mines_set, 1)
@@ -92,8 +100,8 @@ if __name__=="__main__":
     num_tests = 1000
     for i in range(num_tests):
         print("\nTEST # {}".format(i))
-        test_lose()
+        test_win()
     for i in range(num_tests):
         print("\nTEST # {}".format(i))
-        test_win()
-
+        test_lose()
+ 

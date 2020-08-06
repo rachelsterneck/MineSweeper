@@ -2,14 +2,16 @@ from flask import Flask, request
 from game import Mine
 import json
 
+# Build Flask app 
 app = Flask(__name__)
-
 mine = Mine(size=9, num_mines=10)
 
+# Load HTML when navigating to web app
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
 
+# Start new game by creating new Mine instance
 @app.route('/new_game')
 def new_game():
     global mine
@@ -17,6 +19,7 @@ def new_game():
     json_mine = mine.to_json()
     return json_mine
 
+# Update game and send unclicked tiles to client
 @app.route('/update_game', methods=['POST'])
 def update_game():
     if not request.json:
@@ -25,6 +28,8 @@ def update_game():
     y = request.json['x_guess']
     x = request.json['y_guess']
 
+    # mine.x_guess and mine.y_guess are None when
+    # game has just started and mines need to be added to board
     if mine.x_guess is None and mine.y_guess is None:
         mine.board, _ = mine.create_mines(x, y)
         mine.print_solution()
